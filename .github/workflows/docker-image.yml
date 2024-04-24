@@ -7,11 +7,24 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      DOCKER_TAG: homqyy/gitea:1.21.11-rootless
+    steps:
+    - name: Checkout the repository
+      uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build -f gitea/Dockerfile -t ${{ env.DOCKER_TAG }} ./gitea
+    - name: Push the Docker image
+      run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+  build-CN:
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_TAG: homqyy/gitea:1.21.11-rootless-CN
     steps:
     - name: Checkout the repository
       uses: actions/checkout@v3
     - name: Build the Docker image in CN
-      run: docker build --build-arg COUNTRY=CN -f gitea/Dockerfile -t homqyy/gitea:1.21.11-rootless-CN ./gitea
+      run: docker build --build-arg COUNTRY=CN -f gitea/Dockerfile -t ${{ env.DOCKER_TAG }} ./gitea
     - name: Push the Docker image in CN
       run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
 
