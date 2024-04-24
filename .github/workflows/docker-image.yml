@@ -8,7 +8,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout the repository
+      uses: actions/checkout@v3
     - name: Build the Docker image in CN
       run: docker build --build-arg COUNTRY=CN -f gitea/Dockerfile -t homqyy/gitea:1.21.11-rootless-CN ./gitea
     - name: Push the Docker image in CN
