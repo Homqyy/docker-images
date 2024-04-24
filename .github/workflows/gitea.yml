@@ -42,7 +42,7 @@ jobs:
       uses: actions/checkout@v3
     - name: Build the Docker image in CN
       run: |
-        docker build -f gitea/Dockerfile -t ${{ env.DOCKER_NAME }}:${{ env.DOCKER_VERSION }}-${{ env.DOCKER_TAG}} ./gitea
+        docker build --build-arg COUNTRY=CN -f gitea/Dockerfile -t ${{ env.DOCKER_NAME }}:${{ env.DOCKER_VERSION }}-${{ env.DOCKER_TAG}} ./gitea
     - name: Push the Docker image in CN
       run: |
         echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
