@@ -18,3 +18,6 @@ RUN if [ "$COUNTRY" = "CN" ]; then \
     fi
 
 RUN pip3 install nbconvert
+
+# cleanup
+RUN rm -rf china-mirror
