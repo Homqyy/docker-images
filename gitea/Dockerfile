@@ -21,3 +21,5 @@ RUN pip3 install nbconvert
 
 # cleanup
 RUN rm -rf china-mirror
+
+USER 1000:1000
