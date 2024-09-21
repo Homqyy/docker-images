@@ -5,8 +5,7 @@ USER root
 
 # if country is CN, replace the mirror
 RUN if [ "$COUNTRY" = "CN" ]; then \
-        git clone https://github.com/Homqyy/china-mirror \
-        && sh china-mirror/os.sh; \
+        curl -sSL https://raw.githubusercontent.com/Homqyy/china-mirror/main/os.sh | sh; \
     fi
 
 # cleanup
