@@ -13,5 +13,5 @@ RUN if [ "$COUNTRY" = "CN" ]; then \
 
 # cleanup
 RUN if [ "$COUNTRY" = "CN" ]; then \
-        rm -rf china-mirror \
+        rm -rf china-mirror; \
     fi
