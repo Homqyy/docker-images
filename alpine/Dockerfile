@@ -3,11 +3,15 @@ ARG COUNTRY=
 
 USER root
 
+RUN apk add --no-cache git
+
 # if country is CN, replace the mirror
 RUN if [ "$COUNTRY" = "CN" ]; then \
-        wget -qO- https://raw.githubusercontent.com/Homqyy/china-mirror/main/os.sh | sh; \
-            || { echo "Failed to replace mirror"; exit 1; }; \
+        git clone https://github.com/Homqyy/china-mirror \
+        && sh china-mirror/os.sh; \
     fi
 
 # cleanup
-RUN rm -rf china-mirror
+RUN if [ "$COUNTRY" = "CN" ]; then \
+        rm -rf china-mirror \
+    fi
