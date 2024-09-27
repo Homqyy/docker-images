@@ -1,0 +1,17 @@
+FROM ubuntu:22.04
+ARG COUNTRY=
+
+USER root
+
+RUN apt-get update && apt-get install -y git
+
+# if country is CN, replace the mirror
+RUN if [ "$COUNTRY" = "CN" ]; then \
+        git clone https://github.com/Homqyy/china-mirror \
+        && sh china-mirror/os.sh; \
+    fi
+
+# cleanup
+RUN if [ "$COUNTRY" = "CN" ]; then \
+        rm -rf china-mirror; \
+    fi
