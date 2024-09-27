@@ -14,7 +14,7 @@ RUN apk --no-cache add asciidoctor freetype freetype-dev gcc g++ libpng libffi-d
 
 # if country is CN, replace the pip mirror
 RUN if [ "$COUNTRY" = "CN" ]; then \
-        sh china-mirror/pypi.sh; \
+        bash china-mirror/pypi.sh; \
     fi
 
 # Basic: refers to https://docs.gitea.com/administration/external-renderers
